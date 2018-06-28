@@ -54,7 +54,7 @@
 
 当然,如果已经有了活动基类,无法之间直接去继承[BaseActivity](./src/main/java/com/knowledge/mnlin/rregister/util/BaseActivity.java),那么就需要将[BaseActivity](./src/main/java/com/knowledge/mnlin/rregister/util/BaseActivity.java)中的代码拷贝到自己的Activity基类中,同时让Activity实现[ListenerInActivity](./src/main/java/com/knowledge/mnlin/rregister/util/ListenerInActivity.java)接口.
 
----
+```
 
     public abstract class MyBaseActivity extends AppCompatActivity implements ListenerInActivity {
         /**
@@ -100,19 +100,19 @@
             callbackOnStop = callback;
         }
     }
-    
----
+```  
+
 
 然后在自己的Activity中需要监听广播的时候启动监听:
 比如,现在需要监听屏幕的打开和关闭,那么可以在需要的地方做逻辑处理:
 
----
+```
 
     BCRMachine.registerSMSReceiver(this, this, RemoveTime.onDestroy, pair ->{
         System.out.println(pair.first + " " + pair.second);
     } );
     
----
+```
 
 库中提供的静态方法,一般有四个参数:Activity,ListenerInActivity,[RemoveTime](./src/main/java/com/knowledge/mnlin/rregister/util/RemoveTime.java),[HttpCallback](./src/main/java/com/knowledge/mnlin/rregister/util/HttpCallback.java)
 

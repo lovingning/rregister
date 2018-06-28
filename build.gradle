@@ -8,7 +8,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -37,8 +37,6 @@ dependencies {
 
     //AndroidUtilCode
     implementation 'com.blankj:utilcode:1.12.1'
-
-
 }
 
 
@@ -62,7 +60,7 @@ bintray {
 }
 
 //版本
-version = "0.0.1"
+version = "1.0.0"
 //包名
 group = "com.knowledge.mnlin"
 

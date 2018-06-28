@@ -170,6 +170,28 @@ public class BCRMachine {
     }
 
     /**
+     * 注册监听器,通过公用方法,利用反射来生成对象(不强制检查泛型是否正确)
+     * <p>
+     * 反射只调用一次,基本不会影响性能
+     * <p>
+     * 规定添加的监听器构造方法需要传入 callback,且构造方法访问权限为public
+     * <p>
+     * 泛型 F 为回调函数中需要传入的类型
+     * <p>
+     * 泛型 T 为新添加的广播接收者的类型
+     *
+     * @return 注册得到的广播监听器
+     * <p>
+     * 该方法只向外部提供,用于动态的添加监听器;
+     * 本模块中方法不会主动去调用
+     */
+    public static <F, T extends BaseReceiver> BroadcastReceiver registerBroadcastWithoutCheck(Activity activity, ListenerInActivity regs, RemoveTime time, HttpCallback<F> cb, Class<T> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, UnsupportedOperationException {
+        Constructor<T> constructor = clazz.getConstructor(HttpCallback.class);
+        T receiver = constructor.newInstance(cb);
+        return commonRemove(activity, regs, time, receiver.getIntentFilter(), receiver);
+    }
+
+    /**
      * 移除监听
      */
     private static BroadcastReceiver commonRemove(Activity activity, ListenerInActivity regs, RemoveTime time, IntentFilter filter, BroadcastReceiver receiver) {
